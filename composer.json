@@ -4,7 +4,7 @@
 			"Braspag\\" : "src/Braspag"
 		}
 	},
-	"name" : "braspag/BraspagApiPhpSdk",
+	"name" : "Plataforma13/BraspagApiPhpSdk",
 	"description" : "Integração com a API da Braspag",
 	"license" : "MIT",
 	"type" : "library",
