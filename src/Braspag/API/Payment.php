@@ -512,12 +512,12 @@ class Payment implements \JsonSerializable
 
     public function getProviderReturnMessage()
     {
-        return $this->providerReturnCode;
+        return $this->providerReturnMessage;
     }
 
-    public function setProviderReturnMessage($providerReturnCode)
+    public function setProviderReturnMessage($providerReturnMessage)
     {
-        $this->providerReturnCode = $providerReturnCode;
+        $this->providerReturnMessage = $providerReturnMessage;
         return $this;
     }
 
