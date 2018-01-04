@@ -31,6 +31,9 @@ abstract class AbstractSaleRequest
 
         $curl = curl_init($url);
 
+        if ( ! defined('CURL_SSLVERSION_TLSv1_2') )
+            define('CURL_SSLVERSION_TLSv1_2',6);
+
         curl_setopt($curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
 
