@@ -55,8 +55,8 @@ abstract class AbstractSaleRequest
             $headers[] = 'Content-Length: 0';
         }
 
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, BRASPAG_CONNECTTIMEOUT);
+        curl_setopt($curl, CURLOPT_TIMEOUT, BRASPAG_TIMEOUT);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
