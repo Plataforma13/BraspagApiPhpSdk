@@ -55,8 +55,8 @@ abstract class AbstractSaleRequest
             $headers[] = 'Content-Length: 0';
         }
 
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, config('payment.braspag.connect_timeout'));
-        curl_setopt($curl, CURLOPT_TIMEOUT, config('payment.braspag.timeout'));
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, BRASPAG_CONNECTTIMEOUT);
+        curl_setopt($curl, CURLOPT_TIMEOUT, BRASPAG_TIMEOUT);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
