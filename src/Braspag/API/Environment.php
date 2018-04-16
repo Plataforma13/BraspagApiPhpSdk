@@ -24,7 +24,7 @@ class Environment
     public static function homolog()
     {
         $api = 'https://apihomolog.braspag.com.br/';
-        $apiQuery = 'https://apihomolog.braspag.com.br/';
+        $apiQuery = 'https://apiqueryhomolog.braspag.com.br/';
 
         return new Environment($api, $apiQuery);
     }
