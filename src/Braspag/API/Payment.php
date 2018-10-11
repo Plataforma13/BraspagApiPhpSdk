@@ -8,7 +8,7 @@ class Payment implements \JsonSerializable
 
     const PAYMENTTYPE_DEBITCARD = 'DebitCard';
 
-    const PAYMENTTYPE_ELECTRONIC_TRANSFER = 'ElectronicTransfer';
+    const PAYMENTTYPE_ELECTRONIC_TRANSFER = 'EletronicTransfer';
 
     const PAYMENTTYPE_BOLETO = 'Boleto';
 
