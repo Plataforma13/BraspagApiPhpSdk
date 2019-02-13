@@ -1,8 +1,11 @@
 <?php
 namespace Braspag\API;
 
+use App\Models\Payment\Braspag\BraspagOrder;
 use Braspag\API\Merchant;
+use Braspag\API\Request\BraspagRequestException;
 use Braspag\API\Request\CreateSaleRequest;
+use Braspag\API\Request\QueryMerchantOrderIdRequest;
 use Braspag\API\Request\QuerySaleRequest;
 use Braspag\API\Request\UpdateSaleRequest;
 use Braspag\API\Request\QueryRecurrentPaymentRequest;
@@ -83,6 +86,43 @@ class Braspag
         $queryRecurrentPaymentRequest = new queryRecurrentPaymentRequest($this->merchant, $this->environment);
 
         return $queryRecurrentPaymentRequest->execute($recurrentPaymentId);
+    }
+
+    public function getMerchantOrderId($merchantOrderId)
+    {
+        $queryMerchantOrderIdRequest = new QueryMerchantOrderIdRequest($this->merchant, $this->environment);
+
+        return $queryMerchantOrderIdRequest->execute($merchantOrderId);
+    }
+
+    public function checkAndCancelOrderFailed($merchantOrderId)
+    {
+        justLog('start ---> checkAndCancelOrderFailed');
+
+        try {
+
+            $response = self::getMerchantOrderId($merchantOrderId);
+
+            foreach($response->getPayments() as $payment) {
+                $sale = self::getSale($payment->PaymentId);
+                if($sale->getPayment()->getstatus() == BraspagOrder::STATUS_AUTHORIZED) {
+                    $cancel = self::cancelSale($payment->PaymentId);
+                    justLog($cancel->getPayment()->getStatus());
+                    justLog('true');
+                    return true;
+                } else {
+                    justLog('else');
+                    return false;
+                }
+            }
+
+        } catch (BraspagRequestException $e) {
+            justLog('1 - '.$e->getCode().' - '.$e->getMessage());
+        } catch (BraspagError $e) {
+            justLog('2 - '.$e->getMessage());
+        }
+
+        justLog('exit ---> checkAndCancelOrderFailed');
     }
 
     /**
