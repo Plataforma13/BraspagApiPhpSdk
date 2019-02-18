@@ -1,6 +1,7 @@
 <?php
 namespace Braspag\API;
 
+use App\Exceptions\PaymentProcessException;
 use App\Models\Payment\Braspag\BraspagOrder;
 use Braspag\API\Merchant;
 use Braspag\API\Request\BraspagRequestException;
@@ -93,36 +94,6 @@ class Braspag
         $queryMerchantOrderIdRequest = new QueryMerchantOrderIdRequest($this->merchant, $this->environment);
 
         return $queryMerchantOrderIdRequest->execute($merchantOrderId);
-    }
-
-    public function checkAndCancelOrderFailed($merchantOrderId)
-    {
-        justLog('start ---> checkAndCancelOrderFailed');
-
-        try {
-
-            $response = self::getMerchantOrderId($merchantOrderId);
-
-            foreach($response->getPayments() as $payment) {
-                $sale = self::getSale($payment->PaymentId);
-                if($sale->getPayment()->getstatus() == BraspagOrder::STATUS_AUTHORIZED) {
-                    $cancel = self::cancelSale($payment->PaymentId);
-                    justLog($cancel->getPayment()->getStatus());
-                    justLog('true');
-                    return true;
-                } else {
-                    justLog('else');
-                    return false;
-                }
-            }
-
-        } catch (BraspagRequestException $e) {
-            justLog('1 - '.$e->getCode().' - '.$e->getMessage());
-        } catch (BraspagError $e) {
-            justLog('2 - '.$e->getMessage());
-        }
-
-        justLog('exit ---> checkAndCancelOrderFailed');
     }
 
     /**

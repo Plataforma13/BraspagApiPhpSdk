@@ -11,16 +11,11 @@ namespace Braspag\API;
 
 class MerchantOrderId implements BraspagSerializable
 {
-
     private $reasonCode;
 
     private $reasonMessage;
 
     private $payments;
-
-    private $paymentId;
-
-    private $receveidDate;
 
     /**
      * @return mixed
@@ -73,34 +68,6 @@ class MerchantOrderId implements BraspagSerializable
     /**
      * @return mixed
      */
-    public function getPaymentId()
-    {
-        return $this->paymentId;
-    }
-
-    /**
-     * @param mixed $paymentId
-     */
-    public function setPaymentId($paymentId)
-    {
-        $this->paymentId = $paymentId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getReceveidDate()
-    {
-        return $this->receveidDate;
-    }
-
-    /**
-     * @param mixed $receveidDate
-     */
-    public function setReceveidDate($receveidDate)
-    {
-        $this->receveidDate = $receveidDate;
-    }
 
     public function jsonSerialize()
     {
