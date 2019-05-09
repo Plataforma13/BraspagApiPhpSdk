@@ -89,6 +89,10 @@ class Braspag
         return $queryRecurrentPaymentRequest->execute($recurrentPaymentId);
     }
 
+    /**
+     * @param $merchantOrderId
+     * @return mixed
+     */
     public function getMerchantOrderId($merchantOrderId)
     {
         $queryMerchantOrderIdRequest = new QueryMerchantOrderIdRequest($this->merchant, $this->environment);
