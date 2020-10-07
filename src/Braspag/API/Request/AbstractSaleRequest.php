@@ -58,6 +58,7 @@ abstract class AbstractSaleRequest
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, BRASPAG_CONNECTTIMEOUT);
         curl_setopt($curl, CURLOPT_TIMEOUT, BRASPAG_TIMEOUT);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_ENCODING, "");
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
         $response = curl_exec($curl);

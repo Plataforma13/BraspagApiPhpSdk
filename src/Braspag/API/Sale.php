@@ -43,6 +43,10 @@ class Sale implements \JsonSerializable
     {
         $object = json_decode($json);
 
+        if (is_null($object)) {
+            return null;
+        }
+
         $sale = new Sale();
         $sale->populate($object);
 
